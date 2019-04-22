@@ -20,13 +20,10 @@ import android.view.WindowManager;
 /**
  * @Author wangguoli
  */
-public class CustomView extends View {
+public class CustomView extends AppCompatButton {
 
     private int lastX, lastY;
     private int maxWidth, maxHeight;
-    private Paint wordPaint;
-    private int word_color = Color.RED;//字体颜色
-    private String word_content = "";//
 
     public CustomView(Context context) {
         super(context);
@@ -55,10 +52,6 @@ public class CustomView extends View {
         maxWidth = dm.widthPixels;
         maxHeight = dm.heightPixels - getNavigationBarHeight() - getStatusHeight(context) - getTitleHeight((Activity) context) - getActionBatHeight(context);
         /*---------------------------------------初始化高度结束——————————————————————————————————————*/
-
-        /*---------------------------------------初始化画笔开始——————————————————————————————————————*/
-        wordPaint = new Paint();
-        /*---------------------------------------初始化画笔结束——————————————————————————————————————*/
     }
 
     @Override
@@ -97,13 +90,6 @@ public class CustomView extends View {
                 break;
         }
         return super.onTouchEvent(event);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-//        wordPaint.setColor(word_color);
-//        canvas.drawText(word_content,);
     }
 
     /**

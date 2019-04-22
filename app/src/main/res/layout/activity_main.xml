@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:text="拖我啊"/>
+        android:text="这是一个button"/>
 
 
 </RelativeLayout>
