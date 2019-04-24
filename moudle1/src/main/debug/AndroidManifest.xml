@@ -4,6 +4,7 @@
     package="com.biligle.moudle1">
 
     <application
+        android:name=".debug.moudle1App"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">

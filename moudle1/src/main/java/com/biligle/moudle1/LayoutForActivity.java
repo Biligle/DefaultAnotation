@@ -14,10 +14,10 @@ public class LayoutForActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_for_layout);
         if (BuildConfig.isMoudle) {
-            //集成模式
-        } else {
             //组件模式
             Toast.makeText(this,"组件模式",Toast.LENGTH_SHORT).show();
+        } else {
+            //集成模式
         }
     }
 }

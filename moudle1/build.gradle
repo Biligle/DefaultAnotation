@@ -1,7 +1,7 @@
 if (rootProject.ext.isMoudle) {
-    apply plugin: 'com.android.library'
-} else {
     apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
 def configAndroid = rootProject.ext.android
 def configAppId = rootProject.ext.appId
@@ -9,11 +9,11 @@ def configDepencies = rootProject.ext.dependencies
 android {
     compileSdkVersion configAndroid.compileSdkVersion
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion configAppId.targetSdkVersion
-        versionCode configAppId.versionCode
-        versionName configAppId.versionName
-        if (!rootProject.ext.isMoudle) {
+        minSdkVersion configAndroid.minSdkVersion
+        targetSdkVersion configAndroid.targetSdkVersion
+        versionCode configAndroid.versionCode
+        versionName configAndroid.versionName
+        if (rootProject.ext.isMoudle) {
             applicationId configAppId.moudle1
         }
         buildConfigField("boolean","isMoudle",String.valueOf(rootProject.ext.isMoudle))
@@ -22,12 +22,16 @@ android {
         sourceSets {
             main {
                 if (rootProject.ext.isMoudle) {
+                    //组件模式
+                    manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                    java.srcDirs 'src/main/java'
+                } else {
                     //集成模式
                     manifest.srcFile 'src/main/AndroidManifest.xml'
-                } else {
-                    //组件模式
-                    manifest.srcFile 'src/main/moudle/AndroidManifest.xml'
-                    java.srcDirs 'src/main/java'
+                    //release 时 debug 目录下文件不需要合并到主工程
+                    java {
+                        exclude('**/debug*/*')
+                    }
                 }
             }
         }
