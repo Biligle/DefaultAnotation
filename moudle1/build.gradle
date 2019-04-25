@@ -10,6 +10,11 @@ android {
     buildToolsVersion configAndroid.buildToolsVersion
 
     defaultConfig {
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+        //65535
+        multiDexEnabled true
         minSdkVersion configAndroid.minSdkVersion
         targetSdkVersion configAndroid.targetSdkVersion
         versionCode configAndroid.versionCode
@@ -17,7 +22,8 @@ android {
         if (rootProject.ext.isMoudle) {
             applicationId configAppId.moudle1
         }
-        buildConfigField("boolean","isMoudle",String.valueOf(rootProject.ext.isMoudle))
+        //方便在class中控制逻辑（BuildConfig.isMoudle）
+        buildConfigField("boolean", "isMoudle", String.valueOf(rootProject.ext.isMoudle))
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //资源配置
         sourceSets {
@@ -40,12 +46,27 @@ android {
 
     buildTypes {
         release {
+            //BuildConfig.isDebug = false
+            buildConfigField("boolean", "isDebug", "false")
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 移除无用的resource文件
+            shrinkResources false
+            //是否启用zipAlign压缩
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
+            //BuildConfig.isDebug = true，debug模式
+            buildConfigField("boolean", "isDebug", "true")
+            jniDebuggable true
+            renderscriptDebuggable true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 移除无用的resource文件
+            shrinkResources false
+            //是否启用zipAlign压缩
+            zipAlignEnabled true
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 

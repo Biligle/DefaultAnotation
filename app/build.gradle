@@ -19,18 +19,40 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        config {
+            keyAlias 'biligle.com'
+            keyPassword 'biligle.com'
+            storeFile file('./keystore/biligle_apk.key')
+            storePassword 'biligle.com'
+        }
+    }
+
     buildTypes {
         release {
             //BuildConfig.isDebug = false
             buildConfigField("boolean", "isDebug", "false")
             minifyEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            //是否启用zipAlign压缩
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
             //BuildConfig.isDebug = true，debug模式
             buildConfigField("boolean", "isDebug", "true")
+            jniDebuggable true
+            renderscriptDebuggable true
             minifyEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            //是否启用zipAlign压缩
+            zipAlignEnabled true
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 
