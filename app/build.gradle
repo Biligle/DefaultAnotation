@@ -7,6 +7,10 @@ android {
     buildToolsVersion configAndroid.buildToolsVersion
 
     defaultConfig {
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+        multiDexEnabled true
         applicationId configAppId.app
         minSdkVersion configAndroid.minSdkVersion
         targetSdkVersion configAndroid.targetSdkVersion
