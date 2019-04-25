@@ -1,5 +1,4 @@
 package com.biligle.moudle1;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;

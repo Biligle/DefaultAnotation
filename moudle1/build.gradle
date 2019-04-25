@@ -5,9 +5,10 @@ if (rootProject.ext.isMoudle) {
 }
 def configAndroid = rootProject.ext.android
 def configAppId = rootProject.ext.appId
-def configDepencies = rootProject.ext.dependencies
 android {
     compileSdkVersion configAndroid.compileSdkVersion
+    buildToolsVersion configAndroid.buildToolsVersion
+
     defaultConfig {
         minSdkVersion configAndroid.minSdkVersion
         targetSdkVersion configAndroid.targetSdkVersion
@@ -52,5 +53,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation rootProject.ext.dependencies["appcompat-v7"]
 }

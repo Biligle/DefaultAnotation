@@ -1,9 +1,11 @@
 apply plugin: 'com.android.application'
 def configAndroid = rootProject.ext.android
 def configAppId = rootProject.ext.appId
-def configDepencies = rootProject.ext.dependencies
+def configLibrary = rootProject.ext.dependencies
 android {
     compileSdkVersion configAndroid.compileSdkVersion
+    buildToolsVersion configAndroid.buildToolsVersion
+
     defaultConfig {
         applicationId configAppId.app
         minSdkVersion configAndroid.minSdkVersion
@@ -12,26 +14,56 @@ android {
         versionName configAndroid.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             //BuildConfig.isDebug = false
-            buildConfigField("boolean","isDebug","false")
+            buildConfigField("boolean", "isDebug", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             //BuildConfig.isDebug = true，debug模式
-            buildConfigField("boolean","isDebug","true")
+            buildConfigField("boolean", "isDebug", "true")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //配置资源
+    sourceSets {
+        main {
+            if (!rootProject.ext.isMoudle) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    //release 时 debug 目录下文件不需要合并到主工程
+                    exclude '**/debug/**'
+                }
+            }
+        }
+    }
+}
+
+//编译期组件隔离，运行期组件按需依赖
+if (!rootProject.ext.isMoudle) {
+    //集成模式
+    def tasks = project.gradle.startParameter.taskNames
+    for (String task : tasks) {
+        def uperName = task.toUpperCase()
+        if (uperName.contains("ASSEMBLE") || uperName.contains("INSTALL")) {
+            dependencies.add("implementation", project.project(':' + "moudle1"))
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    configLibrary.each { k, v -> implementation v }
+    annotationProcessor configLibrary["butterknife-compiler"]
     implementation project(':basemoudle')
     if (!rootProject.ext.isMoudle) {
-        implementation project (':moudle1')
+        implementation project(':moudle1')
     }
 }

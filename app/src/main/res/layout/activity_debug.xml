@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".debug.DebugActivity">
+
+    <TextView
+        android:id="@+id/tv_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="(组件化模式)当前是主工程APP空壳"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"
+        style="@style/Base.CardView"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_top"
+        android:padding="15dp"
+        android:textSize="18sp"
+        android:text="TIP1：\n        组件化模式下（isMoudle=true），主工程是空壳，请去config.gradle文件中，修改isMoudle=false，切换为集成模式，再次运行。\n\nTIP2：\n        组件化模式下（isMoudle=true），切换moudle1，或者其他moudle，即可单独运行打包。"/>
+</android.support.constraint.ConstraintLayout>
