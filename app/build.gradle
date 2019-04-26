@@ -23,7 +23,7 @@ android {
         config {
             keyAlias 'biligle.com'
             keyPassword 'biligle.com'
-            storeFile file('./keystore/biligle_apk.key')
+            storeFile file('../keystore/biligle_apk.jks')
             storePassword 'biligle.com'
         }
     }
@@ -59,9 +59,11 @@ android {
     //配置资源
     sourceSets {
         main {
-            if (!rootProject.ext.isMoudle) {
+            if (rootProject.ext.isMoudle) {
+                //组件模式
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
             } else {
+                //集成模式
                 manifest.srcFile 'src/main/AndroidManifest.xml'
                 java {
                     //release 时 debug 目录下文件不需要合并到主工程
