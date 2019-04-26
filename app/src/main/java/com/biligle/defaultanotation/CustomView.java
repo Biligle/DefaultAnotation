@@ -18,6 +18,7 @@ import android.view.WindowManager;
 public class CustomView extends AppCompatButton {
 
     private int lastX, lastY;
+    private int offsetX, offsetY;
     private int maxWidth, maxHeight;
 
     public CustomView(Context context) {
@@ -67,8 +68,8 @@ public class CustomView extends AppCompatButton {
                 lastY = y;
                 break;
             case MotionEvent.ACTION_MOVE:
-                int offsetX = x - lastX;
-                int offsetY = y - lastY;
+                offsetX = x - lastX;
+                offsetY = y - lastY;
                 int left = getLeft() + offsetX < MIN_LEFT ? MIN_LEFT
                         : getLeft() + offsetX > MAX_LEFT ? MAX_LEFT
                         : getLeft() + offsetX;
@@ -83,8 +84,21 @@ public class CustomView extends AppCompatButton {
                         : getBottom() + offsetY;
                 layout(left, top, right, bottom);
                 break;
+            case MotionEvent.ACTION_UP:
+                if (offsetX == 0 && offsetY == 0) {
+                    //主动触发（逻辑：当空件移动了就不触发点击事件）
+                    performClick();
+                }
+                offsetX = offsetY = 0;
+                break;
         }
-        return super.onTouchEvent(event);
+        return true;
+    }
+
+    @Override
+    public boolean performClick() {
+        //处理外部点击事件，防止触发不了
+        return super.performClick();
     }
 
     /**
