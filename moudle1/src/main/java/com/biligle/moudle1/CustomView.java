@@ -3,7 +3,7 @@ package com.biligle.moudle1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v7.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 def configAndroid = rootProject.ext.android
 def configAppId = rootProject.ext.appId
-def configLibrary = rootProject.ext.dependencies
+def commonLibs = rootProject.ext.commonLibs
 android {
     compileSdkVersion configAndroid.compileSdkVersion
     buildToolsVersion configAndroid.buildToolsVersion
@@ -16,7 +16,7 @@ android {
         targetSdkVersion configAndroid.targetSdkVersion
         versionCode configAndroid.versionCode
         versionName configAndroid.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
@@ -88,8 +88,6 @@ if (!rootProject.ext.isMoudle) {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    configLibrary.each { k, v -> implementation v }
-    annotationProcessor configLibrary["butterknife-compiler"]
     implementation project(':basemoudle')
     if (!rootProject.ext.isMoudle) {
         implementation project(':moudle1')

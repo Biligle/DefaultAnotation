@@ -1,29 +1,29 @@
-package com.biligle.defaultanotation;
+package com.biligle.moudle1.debug;
 
 import com.biligle.basemoudle.BaseFragment;
 import com.biligle.basemoudle.BaseFragmentActivity;
 import com.biligle.basemoudle.widgets.CustomViewPager;
 import com.biligle.moudle1.Fragment1;
 import com.biligle.moudle1.MainAdapter;
+import com.biligle.moudle1.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  组件化模式下，部分导包会报错，忽略掉
- *  将config.gradle里的isMoudle改成false就好了
+ * @Author wangguoli
  */
-public class MainActivity extends BaseFragmentActivity {
+public class LayoutForActivity extends BaseFragmentActivity {
+
 
     private CustomViewPager vp_main;
 
     private List<BaseFragment> fragments;
     private MainAdapter mainAdapter;
 
-
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.activity_for_layout;
     }
 
     @Override
@@ -37,5 +37,4 @@ public class MainActivity extends BaseFragmentActivity {
         vp_main.setOffscreenPageLimit(4);
         vp_main.setAdapter(mainAdapter);
     }
-
 }

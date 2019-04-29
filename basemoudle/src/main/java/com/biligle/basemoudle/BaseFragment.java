@@ -4,33 +4,29 @@ package com.biligle.basemoudle;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * @Author wangguoli
  */
-public abstract class BaseFragment<T extends Activity> extends Fragment {
-    protected T mContext;
-    private Unbinder mUnbinder;
+public abstract class BaseFragment extends Fragment {
+    protected Activity mContext;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = (T) context;
+        mContext = (Activity) context;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View mView = getViewLayoutId(inflater, container, savedInstanceState);
-        mUnbinder = ButterKnife.bind(this, mView);
         init(mView);
         return mView;
     }
@@ -38,7 +34,6 @@ public abstract class BaseFragment<T extends Activity> extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mUnbinder != null) mUnbinder.unbind();
     }
 
     protected abstract View getViewLayoutId(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);

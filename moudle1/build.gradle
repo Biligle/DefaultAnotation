@@ -5,6 +5,7 @@ if (rootProject.ext.isMoudle) {
 }
 def configAndroid = rootProject.ext.android
 def configAppId = rootProject.ext.appId
+def commonLibs = rootProject.ext.commonLibs
 android {
     compileSdkVersion configAndroid.compileSdkVersion
     buildToolsVersion configAndroid.buildToolsVersion
@@ -24,7 +25,7 @@ android {
         }
         //方便在class中控制逻辑（BuildConfig.isMoudle）
         buildConfigField("boolean", "isMoudle", String.valueOf(rootProject.ext.isMoudle))
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //资源配置
         sourceSets {
             main {
@@ -41,6 +42,12 @@ android {
                     }
                 }
             }
+        }
+    }
+    if (rootProject.ext.isMoudle) {
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
         }
     }
 
@@ -74,5 +81,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation project(':basemoudle')
 }

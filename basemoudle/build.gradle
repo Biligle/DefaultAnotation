@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 def configAndroid = rootProject.ext.android
-def configLibrary = rootProject.ext.dependencies
+def commonLibs = rootProject.ext.commonLibs
 android {
     compileSdkVersion configAndroid.compileSdkVersion
     buildToolsVersion configAndroid.buildToolsVersion
@@ -10,15 +10,11 @@ android {
         targetSdkVersion configAndroid.targetSdkVersion
         versionCode configAndroid.versionCode
         versionName configAndroid.versionName
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    configLibrary.each { k, v -> implementation v }
-    annotationProcessor configLibrary["butterknife-compiler"]
-//    implementation 'com.android.support:support-v4:28.0.0'
+    commonLibs.each { k, v -> api v }
 }
