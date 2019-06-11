@@ -1,6 +1,6 @@
 ext {
     //false:集成模式;true:组件模式
-    isMoudle = false
+    isMoudle = true
     android = [
             compileSdkVersion: 28,
             buildToolsVersion: "28.0.3",

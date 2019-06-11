@@ -1,5 +1,8 @@
 package com.biligle.moudle1.debug;
 
+import android.view.View;
+import android.widget.Toast;
+
 import com.biligle.basemoudle.BaseFragment;
 import com.biligle.basemoudle.BaseFragmentActivity;
 import com.biligle.basemoudle.widgets.CustomViewPager;
@@ -36,5 +39,9 @@ public class LayoutForActivity extends BaseFragmentActivity {
         mainAdapter = new MainAdapter(getSupportFragmentManager(), fragments);
         vp_main.setOffscreenPageLimit(4);
         vp_main.setAdapter(mainAdapter);
+    }
+
+    public void doClick(View view) {
+        Toast.makeText(this,"点击了",Toast.LENGTH_SHORT).show();
     }
 }
