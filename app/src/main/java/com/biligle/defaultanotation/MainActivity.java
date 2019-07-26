@@ -37,6 +37,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        vp_main.setOffscreenPageLimit(4);
 //        vp_main.setAdapter(mainAdapter);
         Toast.makeText(this, "我是v1.0.1版本", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "这是v1.0.2", Toast.LENGTH_SHORT).show();
     }
 
 }
