@@ -1,6 +1,8 @@
 package com.biligle.defaultanotation;
 
 import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
 import com.biligle.basemoudle.BaseFragment;
 import com.biligle.basemoudle.BaseFragmentActivity;

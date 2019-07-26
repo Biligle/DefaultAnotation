@@ -22,6 +22,7 @@ public class MainAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
+        //测试随便写
         return fragments.get(i);
     }
 
