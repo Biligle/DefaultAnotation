@@ -1,24 +1,24 @@
 package com.biligle.defaultanotation;
 
+import android.widget.Toast;
+
 import com.biligle.basemoudle.BaseFragment;
 import com.biligle.basemoudle.BaseFragmentActivity;
 import com.biligle.basemoudle.widgets.CustomViewPager;
-import com.biligle.moudle1.Fragment1;
-import com.biligle.moudle1.MainAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  组件化模式下，部分导包会报错，忽略掉
- *  将config.gradle里的isMoudle改成false就好了
+ * 组件化模式下，部分导包会报错，忽略掉
+ * 将config.gradle里的isMoudle改成false就好了
  */
 public class MainActivity extends BaseFragmentActivity {
 
     private CustomViewPager vp_main;
 
     private List<BaseFragment> fragments;
-    private MainAdapter mainAdapter;
+//    private MainAdapter mainAdapter;
 
 
     @Override
@@ -32,10 +32,11 @@ public class MainActivity extends BaseFragmentActivity {
         if (fragments == null) {
             fragments = new ArrayList<>();
         }
-        fragments.add(new Fragment1());
-        mainAdapter = new MainAdapter(getSupportFragmentManager(), fragments);
-        vp_main.setOffscreenPageLimit(4);
-        vp_main.setAdapter(mainAdapter);
+//        fragments.add(new Fragment1());
+//        mainAdapter = new MainAdapter(getSupportFragmentManager(), fragments);
+//        vp_main.setOffscreenPageLimit(4);
+//        vp_main.setAdapter(mainAdapter);
+        Toast.makeText(this, "我是v1.0.1版本", Toast.LENGTH_SHORT).show();
     }
 
 }
